@@ -2,5 +2,5 @@
 
 ### TODOs
 
-- [ ] Deploy on Github Codespaces
+- [X] Deploy on Github Codespaces
 - [ ] Deploy on Gitpod
