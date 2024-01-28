@@ -8,7 +8,7 @@
         
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
+    <body class="bg-white dark:bg-slate-800">
         <div class="container mx-auto py-8">
             {{ $slot }}
         </div>
