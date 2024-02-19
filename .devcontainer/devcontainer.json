@@ -1,27 +1,50 @@
 // https://aka.ms/devcontainer.json
 {
-	"name": "Existing Docker Compose (Extend)",
-	"dockerComposeFile": [
-		"../docker-compose.yml"
-	],
-	"service": "laravel.test",
-	"workspaceFolder": "/var/www/html",
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"bmewburn.vscode-intelephense-client",
-				// "mikestead.dotenv",
-				"amiralizadeh9480.laravel-extra-intellisense"
-				// "ryannaddy.laravel-artisan",
-				// "onecentlin.laravel5-snippets",
-				// "onecentlin.laravel-blade"
-			],
-			"settings": {}
-		}
-	},
-	"remoteUser": "sail",
-	"postCreateCommand": "chown -R 1000:1000 /var/www/html 2>/dev/null || true",
-	"forwardPorts": [80, 5432]
-	// "runServices": [],
-	// "shutdownAction": "none",
+  "name": "Livewire Playground",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/app",
+  "runServices": ["pgsql", "mailpit"],
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+  "forwardPorts": ["80", "443", "5173", "pgsql:5432"],
+  "portsAttributes": {
+    "80": {
+      "label": "HTTP"
+    },
+    "443": {
+      "label": "HTTPS"
+    },
+    "5173": {
+      "label": "Vite"
+    },
+    "pgsql:5432": {
+      "label": "PostGreSQL"
+    }
+  },
+  
+  "remoteUser": "root",
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+  "postCreateCommand": "/post-create-command.sh",
+  "postStartCommand": "/post-start-command.sh",
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // "mikestead.dotenv",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        // "ryannaddy.laravel-artisan",
+        // "onecentlin.laravel5-snippets",
+        // "onecentlin.laravel-blade"
+        "ecmel.vscode-html-css",
+        "bmewburn.vscode-intelephense-client"
+      ],
+      "settings": {}
+    }
+  }
 }

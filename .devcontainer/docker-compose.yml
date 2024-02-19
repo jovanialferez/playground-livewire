@@ -1,0 +1,59 @@
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+
+    volumes:
+      - ../:/app
+      - ../certs:/etc/app/certs
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    
+    working_dir: /app
+    
+    networks:
+        - default
+    
+    environment:
+      APP_NAME: "Livewire Playground"
+      APP_ENV: local
+      APP_KEY: "base64:CLJFk2bXjBBpUsbQPDP/SJdw1qRBpeQvvAYvVlOOGRQ="
+      APP_DEBUG: true
+      APP_URL: "https://localhost"
+      APP_DOMAIN: "localhost"
+      SESSION_DOMAIN: "localhost"
+      LOG_CHANNEL: single
+      DB_CONNECTION: pgsql
+      DB_HOST: pgsql
+      DB_PORT: 5432
+      DB_DATABASE: playground
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      FILESYSTEM_DISK: public
+      FILAMENT_FILESYSTEM_DISK: public
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: file
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: file
+      SESSION_LIFFETIME: 120
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+  
+  pgsql:
+    image: 'postgres:13'
+    environment:
+        PGPASSWORD: password
+        POSTGRES_DB: playground
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: password
+    networks:
+        - default
+        
+  mailpit:
+    image: axllent/mailpit
+    networks:
+      - default
+
+networks:
+  default:
