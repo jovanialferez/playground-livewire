@@ -8,9 +8,17 @@
         
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-white dark:bg-slate-800">
-        <div class="container mx-auto py-8">
-            {{ $slot }}
+    <body class="bg-slate-800">
+        <div class="flex h-screen">
+            <div class="w-72 flex-col px-4 py-2">
+                <ul>
+                    <li><a class="text-slate-400 hover:text-white {{request()->routeIs('default') ? 'font-semibold text-white' : ''}}" href="/" wire:navigate>Home</a></li>
+                    <li><a class="text-slate-400 hover:text-white {{request()->routeIs('users') ? 'font-semibold text-white' : ''}}" href="/users" wire:navigate>Users</a></li>
+                </ul>
+            </div>
+            <div class="bg-white flex-1">
+                {{ $slot }}
+            </div>
         </div>
     </body>
 </html>
