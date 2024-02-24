@@ -1,5 +1,5 @@
 <div class="relative overflow-x-auto">
-    <a class="underline block my-2 text-black dark:text-white" href="{{ route('user-create') }}" wire:navigate>Create new user</a>
+    <a class="underline block my-2 text-black" href="{{ route('user-create') }}" wire:navigate>Create new user</a>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -30,5 +30,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="py-4">
     {{ $users->links() }}
+    </div>
 </div>

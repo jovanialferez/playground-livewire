@@ -16,7 +16,7 @@
                     <li><a class="text-slate-400 hover:text-white {{request()->routeIs('users') ? 'font-semibold text-white' : ''}}" href="/users" wire:navigate>Users</a></li>
                 </ul>
             </div>
-            <div class="bg-white flex-1">
+            <div class="bg-white flex-1 p-4">
                 {{ $slot }}
             </div>
         </div>
