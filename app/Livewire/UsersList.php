@@ -12,10 +12,13 @@ class UsersList extends Component
 {
     use WithPagination;
 
+    public $pageSize = 5;
+    public $search = '';
+
     public function render()
     {
         return view('livewire.users-list', [
-            'users' => User::paginate(10),
+            'users' => User::search($this->search)->paginate($this->pageSize),
         ]);
     }
 }
