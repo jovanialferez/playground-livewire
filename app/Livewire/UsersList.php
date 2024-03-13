@@ -15,6 +15,11 @@ class UsersList extends Component
     public $pageSize = 5;
     public $search = '';
 
+    public function delete(User $user)
+    {
+        $user->delete();
+    }
+
     public function render()
     {
         return view('livewire.users-list', [
