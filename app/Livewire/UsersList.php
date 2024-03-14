@@ -14,16 +14,33 @@ class UsersList extends Component
 
     public $pageSize = 5;
     public $search = '';
+    public $sortColumn = 'name';
+    public $sortDirection = 'ASC';
 
     public function delete(User $user)
     {
         $user->delete();
     }
 
+    public function sortBy(String $column)
+    {
+        if ($this->sortColumn !== $column)
+        {
+            $this->sortColumn = $column;
+            $this->sortDirection = 'ASC';
+            return;
+        }
+
+        $this->sortColumn = $column;
+        $this->sortDirection = $this->sortDirection === 'ASC' ? 'DESC' : 'ASC';
+    }
+
     public function render()
     {
         return view('livewire.users-list', [
-            'users' => User::search($this->search)->paginate($this->pageSize),
+            'users' => User::search($this->search)
+                ->orderBy($this->sortColumn, $this->sortDirection)
+                ->paginate($this->pageSize),
         ]);
     }
 }
