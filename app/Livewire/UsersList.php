@@ -22,6 +22,11 @@ class UsersList extends Component
         $user->delete();
     }
 
+    public function updatedPageSize()
+    {
+        $this->resetPage();   
+    }
+
     public function sortBy(String $column)
     {
         if ($this->sortColumn !== $column)
